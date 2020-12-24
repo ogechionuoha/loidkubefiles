@@ -32,6 +32,7 @@ spec:
                   volumeMounts:
                     - name: nfs-access
                       mountPath: /nfs
+                      subPath: Hotels-50K
                   resources:
                     limits:
                         cpu: '2000m'
