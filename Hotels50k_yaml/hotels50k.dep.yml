@@ -31,7 +31,7 @@ spec:
                   - containerPort: 33000
                   volumeMounts:
                     - name: nfs-access
-                      mountPath: /HOTELS-50K
+                      mountPath: /nfs
                   resources:
                     limits:
                         cpu: '2000m'
