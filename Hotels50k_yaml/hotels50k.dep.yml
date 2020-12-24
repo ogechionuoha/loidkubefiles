@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
     name: loiddep
+    namespace: ogechiproject
     labels:
         app: hotels50k
 spec:
@@ -24,11 +25,13 @@ spec:
             containers:
                 - name: hotels50kcontainer
                   image: uloma07/hotels50k
+                  command: [ "/bin/bash", "-ec"]
+                  args: [ date; sleep 10; echo 'Hello from the Kubernetes cluster'; sleep 1; while true; do sleep 20; done;]
                   ports:
-                  - containerPort: 32000
+                  - containerPort: 33000
                   volumeMounts:
                     - name: nfs-access
-                      mountPath: /nfs/
+                      mountPath: /HOTELS-50K
                   resources:
                     limits:
                         cpu: '2000m'
