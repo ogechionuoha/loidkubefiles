@@ -18,7 +18,7 @@ spec:
                 - name: nfs-access
                   persistentVolumeClaim:
                     claimName: ogechivol1claim
-            restartPolicy: Never
+            restartPolicy: Always
             nodeSelector:
                 node-role.ida/gputitan: 'true'
             containers:
