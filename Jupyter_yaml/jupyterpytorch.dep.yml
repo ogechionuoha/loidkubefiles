@@ -26,7 +26,7 @@ spec:
                   claimName: ogechivol1claim
             containers:
                 - name: pytorchmlcontainer
-                  image: pytorch/conda-cuda:latest
+                  image: inferislux/zaiqiao-ml:latest
                   resources:
                     requests:
                         cpu: "2000m"
