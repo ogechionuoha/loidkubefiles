@@ -1,55 +1,57 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pytorchmlnotebookgpu
-  namespace: ogechiproject
-  label:
-    app: pytorchMLNotebook
+    name: pytorchmlnotebookgpu
+    namespace: ogechiproject
+    label:
+        app: pytorchMLNotebook
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-        app: pytorchMLNotebook
-  template:
-    metadata:
-      labels:
-        app: pytorchMLNotebook
-        deployment: pythonMLNotebookGPU
-        group: ogechi
-    spec:
-      nodeSelector:
-        node-role.ida/gputitan: "true"
-        # node-role.ida/gpu2080ti: "true"
-      containers:
-        - name: pytorchmlcontainer
-            image: pytorch/conda-cuda:latest
-            resources:
-            requests:
-                cpu: "2000m"
-                memory: "4Gi"
-                nvidia.com/gpu: 1
-            limits:
-                cpu: "2500m"
-                memory: "16Gi"
-                nvidia.com/gpu: 1
-            command:
-                - 'jupyter'
-                args:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: pytorchMLNotebook
+    template:
+        metadata:
+            labels:
+                app: pytorchMLNotebook
+                deployment: pythonMLNotebookGPU
+                group: ogechi
+        spec:
+            nodeSelector:
+                node-role.ida/gputitan: "true"
+                # node-role.ida/gpu2080ti: "true"
+            volumes:
+                - name: nfs-access
+                  persistentVolumeClaim:
+                  claimName: ogechivol1claim
+            securityContext: {}
+            serviceAccount: containerroot
+            containers:
+                - name: pytorchmlcontainer
+                  image: pytorch/conda-cuda:latest
+                  resources:
+                    requests:
+                        cpu: "2000m"
+                        memory: "4Gi"
+                        nvidia.com/gpu: 1
+                    limits:
+                        cpu: "2500m"
+                        memory: "16Gi"
+                        nvidia.com/gpu: 1
+                  command:
+                    - 'jupyter'
+                  args:
                     - 'notebook'
                     - '--no-browser'
                     - '--ip=0.0.0.0'
                     - '--allow-root'
                     - '--NotebookApp.token='
                     - '--notebook-dir="/nfs/notebooks/"'
-            ports:
-                - containerPort: 8888
-            imagePullPolicy: IfNotPresent
-            volumeMounts:
-                - mountPath: /nfs/notebooks/
-                    name: nfs-access
-        securityContext: {}
-        serviceAccount: containerroot
-        volumes:
-            - name: nfs-access
-                persistentVolumeClaim:
-                claimName: ogechivol1claim
+                  ports:
+                    - containerPort: 8888
+                  imagePullPolicy: IfNotPresent
+                  volumeMounts:
+                    - mountPath: /nfs/notebooks/
+                      name: nfs-access
+                
+                
