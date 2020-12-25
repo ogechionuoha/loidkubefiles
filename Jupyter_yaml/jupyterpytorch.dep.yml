@@ -3,8 +3,13 @@ kind: Deployment
 metadata:
   name: pytorchmlnotebookgpu
   namespace: ogechiproject
+  label:
+    app: pytorchMLNotebook
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+        app: pytorchMLNotebook
   template:
     metadata:
       labels:
