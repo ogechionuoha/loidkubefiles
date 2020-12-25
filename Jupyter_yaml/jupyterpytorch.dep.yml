@@ -21,35 +21,35 @@ spec:
         node-role.ida/gputitan: "true"
         # node-role.ida/gpu2080ti: "true"
       containers:
-      - name: pytorchmlcontainer
-        image: pytorch/conda-cuda:latest
-        resources:
-          requests:
-            cpu: "2000m"
-            memory: "4Gi"
-            nvidia.com/gpu: 1
-          limits:
-            cpu: "2500m"
-            memory: "16Gi"
-            nvidia.com/gpu: 1
-        command:
-          - 'jupyter'
-        args:
-          - 'notebook'
-          - '--no-browser'
-          - '--ip=0.0.0.0'
-          - '--allow-root'
-          - '--NotebookApp.token='
-          - '--notebook-dir="/nfs/notebooks/"'
-        ports:
-          - containerPort: 8888
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-          - mountPath: /nfs/notebooks/
-            name: nfs-access
-      securityContext: {}
-      serviceAccount: containerroot
-      volumes:
-      - name: nfs-access
-        persistentVolumeClaim:
-          claimName: ogechivol1claim
+        - name: pytorchmlcontainer
+            image: pytorch/conda-cuda:latest
+            resources:
+            requests:
+                cpu: "2000m"
+                memory: "4Gi"
+                nvidia.com/gpu: 1
+            limits:
+                cpu: "2500m"
+                memory: "16Gi"
+                nvidia.com/gpu: 1
+            command:
+                - 'jupyter'
+                args:
+                    - 'notebook'
+                    - '--no-browser'
+                    - '--ip=0.0.0.0'
+                    - '--allow-root'
+                    - '--NotebookApp.token='
+                    - '--notebook-dir="/nfs/notebooks/"'
+            ports:
+                - containerPort: 8888
+            imagePullPolicy: IfNotPresent
+            volumeMounts:
+                - mountPath: /nfs/notebooks/
+                    name: nfs-access
+        securityContext: {}
+        serviceAccount: containerroot
+        volumes:
+            - name: nfs-access
+                persistentVolumeClaim:
+                claimName: ogechivol1claim
