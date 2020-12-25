@@ -44,11 +44,12 @@ spec:
                     - '--ip=0.0.0.0'
                     - '--allow-root'
                     - '--NotebookApp.token='
-                    - '--notebook-dir="/nfs/notebooks/"'
+                    - '--notebook-dir="/nfs/"'
                   ports:
                     - containerPort: 8888
                   volumeMounts:
-                    - mountPath: /nfs/notebooks/
+                    - mountPath: /nfs/
                       name: nfs-access
+                      subPath: notebooks
                 
                 
