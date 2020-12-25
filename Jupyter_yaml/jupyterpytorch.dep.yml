@@ -24,8 +24,6 @@ spec:
                 - name: nfs-access
                   persistentVolumeClaim:
                   claimName: ogechivol1claim
-            securityContext: {}
-            serviceAccount: containerroot
             containers:
                 - name: pytorchmlcontainer
                   image: pytorch/conda-cuda:latest
