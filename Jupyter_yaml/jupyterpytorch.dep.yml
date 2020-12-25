@@ -49,7 +49,6 @@ spec:
                     - '--notebook-dir="/nfs/notebooks/"'
                   ports:
                     - containerPort: 8888
-                  imagePullPolicy: IfNotPresent
                   volumeMounts:
                     - mountPath: /nfs/notebooks/
                       name: nfs-access
