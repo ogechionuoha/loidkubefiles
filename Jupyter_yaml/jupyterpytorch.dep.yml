@@ -45,13 +45,12 @@ spec:
                     - 'notebook'
                     - '--no-browser'
                     - '--ip=0.0.0.0'
-                    - '--allow-root'
                     - '--NotebookApp.token='
-                    - '--notebook-dir="/nfs/"'
+                    - '--notebook-dir="/nfs"'
                   ports:
                     - containerPort: 8888
                   volumeMounts:
-                    - mountPath: /nfs/
+                    - mountPath: /nfs
                       name: nfs-access
                       subPath: notebooks
                 
