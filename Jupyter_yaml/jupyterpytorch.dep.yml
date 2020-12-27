@@ -5,6 +5,7 @@ metadata:
     namespace: ogechiproject
     label:
         app: pytorchMLNotebook
+        group: ogechi
 spec:
     replicas: 1
     selector:
@@ -24,6 +25,7 @@ spec:
                 - name: nfs-access
                   persistentVolumeClaim:
                     claimName: ogechivol1claim
+            serviceAccount: default
             containers:
                 - name: pytorchmlcontainer
                   image: inferislux/zaiqiao-ml:latest

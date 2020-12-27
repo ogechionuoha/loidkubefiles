@@ -5,6 +5,7 @@ metadata:
     namespace: ogechiproject
     labels:
         app: hotels50k
+        group: ogechi
 spec:
     replicas: 1
     selector:
