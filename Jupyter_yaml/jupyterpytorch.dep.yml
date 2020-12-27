@@ -25,6 +25,7 @@ spec:
                 - name: nfs-access
                   persistentVolumeClaim:
                     claimName: ogechivol1claim
+            securityContext: {}
             serviceAccount: default
             containers:
                 - name: pytorchmlcontainer
