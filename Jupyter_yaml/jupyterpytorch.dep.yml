@@ -23,7 +23,7 @@ spec:
             volumes:
                 - name: nfs-access
                   persistentVolumeClaim:
-                  claimName: ogechivol1claim
+                    claimName: ogechivol1claim
             containers:
                 - name: pytorchmlcontainer
                   image: inferislux/zaiqiao-ml:latest
