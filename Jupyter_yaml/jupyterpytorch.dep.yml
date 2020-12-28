@@ -21,10 +21,6 @@ spec:
             nodeSelector:
                 node-role.ida/gputitan: "true"
                 # node-role.ida/gpu2080ti: "true"
-            volumes:
-                - name: nfs-access
-                  persistentVolumeClaim:
-                    claimName: ogechivol1claim
             securityContext: {}
             serviceAccount: default
             containers:
@@ -46,12 +42,8 @@ spec:
                     - '--no-browser'
                     - '--ip=0.0.0.0'
                     - '--NotebookApp.token='
-                    - '--notebook-dir="/nfs"'
                   ports:
                     - containerPort: 8888
-                  volumeMounts:
-                    - mountPath: /nfs
-                      name: nfs-access
-                      subPath: notebooks
+                  
                 
                 
