@@ -21,11 +21,12 @@ spec:
             nodeSelector:
                 node-role.ida/gputitan: "true"
                 # node-role.ida/gpu2080ti: "true"
+            
             securityContext: {}
             serviceAccount: default
             containers:
                 - name: pytorchmlcontainer
-                  image: inferislux/zaiqiao-ml:latest
+                  image: anibali/pytorch
                   resources:
                     requests:
                         cpu: "2000m"
@@ -35,13 +36,8 @@ spec:
                         cpu: "2500m"
                         memory: "16Gi"
                         nvidia.com/gpu: 1
-                  command:
-                    - 'jupyter'
-                  args:
-                    - 'notebook'
-                    - '--no-browser'
-                    - '--ip=0.0.0.0'
-                    - '--NotebookApp.token='
+                  command: [ "/bin/bash", "-ec"]
+                  args: [ date; sleep 10; echo 'Hello from the Kubernetes cluster'; sleep 1; while true; do sleep 20; done;]
                   ports:
                     - containerPort: 8888
                   
