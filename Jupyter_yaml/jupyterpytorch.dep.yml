@@ -21,7 +21,10 @@ spec:
             nodeSelector:
                 node-role.ida/gputitan: "true"
                 # node-role.ida/gpu2080ti: "true"
-            
+            volumes:
+                - name: nfs-access
+                  persistentVolumeClaim:
+                    claimName: ogechivol1claim
             securityContext: {}
             serviceAccount: default
             containers:
@@ -37,9 +40,12 @@ spec:
                         memory: "16Gi"
                         nvidia.com/gpu: 1
                   command: [ "/bin/bash", "-ec"]
-                  args: [ date; sleep 10; echo 'Hello from the Kubernetes cluster'; sleep 1; while true; do sleep 20; done;]
+                  args: [ date; sleep 10; echo 'Hello from the Kubernetes cluster'; sleep 1; while true; do sleep 20; done;]    
                   ports:
                     - containerPort: 8888
-                  
+                  volumeMounts:
+                    - mountPath: /nfs
+                      name: nfs-access
+                      subPath: notebooks
                 
                 
