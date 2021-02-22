@@ -23,7 +23,7 @@ spec:
             restartPolicy: Always
             containers:
                 - name: loiddatacontainer
-                  image: ptell/ubu_py_cv
+                  image: 201980951/opencv-python
                   command: [ "/bin/bash", "-ec"]
                   args: [ date; sleep 10; echo 'Hello'; sleep 1; while true; do sleep 20; done;]
                   ports:
