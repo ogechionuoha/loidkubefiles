@@ -23,11 +23,9 @@ spec:
             restartPolicy: Always
             containers:
                 - name: loiddatacontainer
-                  image: datamachines/jetsonnano-cuda_tensorflow_opencv:10.2_2.3_4.5.1-20210218
-                  command: 
-                    - "python3"
-                  args:
-                    - "/nfs/download_images.py"
+                  image: anibali/pytorch
+                  command: [ "/bin/bash", "-ec"]
+                  args: [ date; sleep 10; echo 'Hello'; sleep 1; while true; do sleep 20; done;]
                   ports:
                     - containerPort: 33000
                   volumeMounts:
