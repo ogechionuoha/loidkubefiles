@@ -23,7 +23,7 @@ spec:
             restartPolicy: Always
             containers:
                 - name: loiddatacontainer
-                  image: 201980951/opencv-python
+                  image: uloma07/hotels50k
                   command: [ "/bin/bash", "-ec"]
                   args: [ date; sleep 10; echo 'Hello'; sleep 1; while true; do sleep 20; done;]
                   ports:
