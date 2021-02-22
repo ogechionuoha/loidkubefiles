@@ -23,7 +23,7 @@ spec:
             restartPolicy: Always
             containers:
                 - name: loiddatacontainer
-                  image: opencvcourses/opencv
+                  image: datamachines/jetsonnano-cuda_tensorflow_opencv
                   command: 
                     - "python3"
                   args:
