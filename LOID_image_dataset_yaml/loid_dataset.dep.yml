@@ -23,7 +23,7 @@ spec:
             restartPolicy: Always
             containers:
                 - name: loiddatacontainer
-                  image: anibali/pytorch
+                  image: opencvcourses/opencv
                   command: 
                     - "python3"
                   args:
