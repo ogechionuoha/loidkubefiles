@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: loiddatadep
+    namespace: ogechiproject
+    labels:
+        app: loiddata
+        group: ogechi
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: loiddata
+    template:
+        metadata:
+            labels:
+                app: loiddata
+        spec:
+            volumes:
+                - name: nfs-access
+                  persistentVolumeClaim:
+                    claimName: ogechivol1claim
+            restartPolicy: Always
+            containers:
+                - name: loiddatacontainer
+                  image: anibali/pytorch
+                  command: 
+                    - "python3"
+                  args:
+                    - "/nfs/download_images.py"
+                  ports:
+                    - containerPort: 33000
+                  volumeMounts:
+                    - name: nfs-access
+                      mountPath: /nfs
+                      subPath: LOID_image_dataset
+                  resources:
+                    limits:
+                        cpu: '4000m'
+                        memory: 4Gi
+                    requests:
+                        cpu: '3000m'
+                        memory: 3Gi
+
+
